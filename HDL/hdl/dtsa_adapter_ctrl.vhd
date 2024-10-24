@@ -1,0 +1,20 @@
+-- TI Proprietary Information - Internal Data.  Copyright (c) 2011, Texas Instruments Incorporated.  All rights reserved.
+library IEEE; use IEEE.Std_Logic_1164.all; use IEEE.Std_Logic_arith.all; use IEEE.Std_Logic_unsigned.all; library work; use work.dtsa_cj_pkg.all; entity E700 is port(P0:in std_logic; P1:in std_logic; P2:in std_logic; P3:in std_logic; 
+P4:in std_logic; P5:in std_logic_vector(7 downto 0); P6:in std_logic_vector(7 downto 0); P7:out std_logic_vector(7 downto 0); P8:in std_logic; P9:out std_logic; P10:in std_logic; P11:in std_logic; P12:in std_logic; P13:in std_logic; P14:in std_logic; 
+P15:in std_logic; P16:in std_logic; P17:in std_logic; P18:in std_logic; P19:out std_logic; P20:out std_logic; P21:out std_logic; P22:in std_logic; P23:in std_logic; P24:out std_logic; P25:out std_logic; 
+P26:out std_logic; P27:out std_logic_vector(K29 downto K30); P28:out std_logic_vector(5 downto 0) ); end E700; architecture RTL of E700 is signal S1:std_logic; signal S2:std_logic; signal S3:std_logic; signal S4:std_logic_vector(5 downto 0); signal S5:std_logic_vector(7 downto 0); 
+signal S6:std_logic_vector(7 downto 0); signal S7:std_logic; signal S8:std_logic; signal S9:std_logic; signal S10:std_logic; signal S11:std_logic_vector(7 downto 0); signal S12:std_logic; signal S13:std_logic; signal S14:std_logic_vector(3 downto 0); signal S15:std_logic; signal S16:std_logic_vector(7 downto 0); 
+signal S17:std_logic; signal S18:std_logic_vector(K29 downto K30); signal S19:std_logic; signal S20:std_logic; signal S21:std_logic; signal S22:std_logic; signal S23:std_logic; signal S24:std_logic_vector(7 downto 0); begin S19<='1'when(P5=K11)AND(P4='1') else'0'; 
+S23<='1'when(P5=K12)AND(P4='1') else'0'; S22<='1'when(P5=K13)AND(P4='1') else'0'; S21<='1'when(P5=K14)AND(P4='1') else'0'; S20<='1'when(P5=K17)AND(P4='1') else'0'; I57:process(P0,P3) begin if(P0='0')then 
+S12<='0'; S13<='0'; elsif(P3'event and P3='1')then if(S19='1')AND(P6(K19)='1')then S12<=P6(K20); end if; if(S19='1')AND(P6(K21)='1')then S13<=P6(K22); end if; end if; end process I57; 
+S5<='0'&S12&'0'&S13&"0000"; P26<=not S12; P25<=S13; I58:process(P0,P2) begin if(P0='0')then S7<='0'; elsif(P2'event and P2='1')then S7<=P11; end if; end process I58; 
+S8<=P11 AND not S7; S9<=(S8 OR S10)AND P13; I59:process(P1,P2) begin if(P1='0')then S10<='0'; elsif(P2'event and P2='1')then S10<=S9; end if; end process I59; P24<=(not S10)or P23; 
+I60:process(P0,P3) begin if(P0='0')then P19<='0'; elsif(P3'event and P3='1')then P19<=(not S13 AND S10 AND not P23); end if; end process I60; I61:process(P0,P3) begin if(P0='0')then 
+S4<="000100"; elsif(P3'event and P3='1')then if(S23='1')then S4<=P6(5 downto 0); end if; end if; end process I61; P28<=S4; I62:process(P0,P3) begin if(P0='0')then 
+S18<=(others=>'0'); elsif(P3'event and P3='1')then if(S22='1')then S18<=P6(K29 downto K30); end if; end if; end process I62; P27<=S18; P9<=S21 AND P6(K40); S1<=S21 AND P6(K42); S2<=(P18 XOR P16)AND not P17; 
+process(P3,P0) begin if(P0='0')then S3<='0'; elsif(P3'event and P3='0')then S3<=(S2 OR S3)AND not S1; end if; end process; I63:process(P0,P2) begin if(P0='0')then 
+S16<=(others=>'0'); elsif(P2'event and P2='1')then S16(K37)<=P22; S16(K38)<=P14; S16(K39)<=P10; S16(K40)<=P8; S16(K41)<=S10; S16(K42)<=S3; S16(K43)<=not P13; S16(K44)<=P12; end if; 
+end process I63; I64:process(P0,P3) begin if(P0='0')then S15<='0'; S17<='0'; elsif(P3'event and P3='1')then if(S20='1')then S15<=P6(K45); S17<=P6(K46); end if; 
+end if; end process I64; S6<="000000"&S15&S17; P21<=S17; P20<=S15; S24<=K1&K5 when P15='0'else K2&K5; S14<=P5(3 downto 0); process(P0,P3) begin if(P0='0')then 
+S11<=(others=>'0'); elsif(P3'event and P3='1')then case S14 is when"0000"=>S11<=K18; when"0001"=>S11<=S24; when"0010"=>S11<=S5; when"0011"=>S11<="00"&S4; when"0100"=>S11<="00000"&S18; when"0101"=>S11<=S16; when"0111"=>S11<=K6; when"1000"=>S11<=S6; 
+when Others=>S11<="00000000"; end case; end if; end process; P7<=S11 when P5(7 downto 4)="0000"else "00000000"; end RTL; 

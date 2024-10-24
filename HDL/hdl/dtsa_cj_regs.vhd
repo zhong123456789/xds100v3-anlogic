@@ -1,0 +1,15 @@
+-- TI Proprietary Information - Internal Data.  Copyright (c) 2011, Texas Instruments Incorporated.  All rights reserved.
+library IEEE; use IEEE.std_logic_1164.all; use IEEE.std_logic_arith.all; use IEEE.std_logic_unsigned.all; library work; use work.dtsa_cj_pkg.all; entity E4e8 is port(P0:in std_logic; P1:in std_logic; P2:in std_logic; P3:in std_logic_vector(K108 downto 0); 
+P4:in std_logic; P5:in std_logic; P6:in std_logic; P7:out std_logic; P8:out std_logic; P9:out std_logic_vector(K129 downto 0); P10:out std_logic_vector(K157 downto 0) ); end E4e8; architecture RTL of E4e8 is signal S1:std_logic; 
+signal S2:std_logic; signal S3:std_logic; signal S4:std_logic; signal S5:std_logic; signal S6:std_logic; signal S7:std_logic; signal S8:std_logic; signal S9:std_logic; signal S10:std_logic; signal S11:std_logic_vector(4 downto 0); signal S12:std_logic_vector(K157 downto 0); 
+signal S13:std_logic; signal S14:std_logic; signal S15:std_logic; signal S16:std_logic; signal S17:std_logic; signal S18:std_logic; begin I26:process(P0,P1) begin if(P0='0')then S14<='0'; 
+elsif(P1'event and P1='0')then if(P6='1')then if(P3(9 downto 5)=K109)then S14<='1'; else S14<='0'; end if; end if; end if; end process I26; I27:process(P0,P1) 
+begin if(P0='0')then S13<='0'; elsif(P1'event and P1='0')then if(P6='1')then if(P3(9 downto 5)=K112)then S13<='1'; else S13<='0'; end if; end if; 
+end if; end process I27; I28:process(P0,P1) begin if(P0='0')then S1<='0'; elsif(P1'event and P1='0')then if(P6='1')then if(P3(4 downto 0)=K121)then S1<='1'; else 
+S1<='0'; end if; end if; end if; end process I28; I29:process(P0,P1) begin if(P0='0')then P7<='0'; elsif(P1'event and P1='0')then if(P6='1')then 
+P7<=P4 AND S14 AND S1; end if; end if; end process I29; S18<=S13 AND P4; I30:process(P0,P1) begin if(P0='0')then S11<=K130; elsif(P1'event and P1='0')then if(P2='1')then 
+S11<=K130; elsif(S18='1')then S11<=P3(4 downto 0); end if; end if; end process I30; P9<=S11; S10<='1'when(S11=K144)else'0'; S4<='1'when(S11=K146)else'0'; S3<=not S11(4)AND not S11(3)AND not S11(2); S5<=S11(3)AND not S11(2); 
+S2<=S11(3)AND S11(2); S8<=S11(3)AND S11(1)AND not S11(0); S6<=S11(3)AND not S11(1); S9<=S11(3)AND not S11(1)AND not S11(0); S7<=S11(3)AND S11(2)AND not S11(1); S17<=P5 OR P2; I31:process(P0,P1) begin if(P0='0')then S12<=(others=>'0'); S12(K147)<='1'; 
+elsif(P1'event and P1='0')then if(S17='1')then if(P2='1')then S12<=(others=>'0'); S12(K147)<='1'; else S12(K149)<=S10; S12(K150)<=S4; S12(K147)<=S3; S12(K151)<=S5; S12(K148)<=S2; 
+S12(K154)<=S8; S12(K152)<=S6; S12(K153)<=S9; S12(K155)<=S7; S12(K156)<=S4 OR S6; end if; end if; end if; end process I31; P10<=S12; S16<='1'when P3(4 downto 2)/="000"else'0'; 
+S15<=S16; I32:process(P0,P1) begin if(P0='0')then P8<='0'; elsif(P1'event and P1='0')then P8<=S13 AND S15 AND S12(K147); end if; end process I32; end rtl; 

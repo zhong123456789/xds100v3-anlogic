@@ -1,0 +1,15 @@
+-- TI Proprietary Information - Internal Data.  Copyright (c) 2011, Texas Instruments Incorporated.  All rights reserved.
+library ieee; use ieee.std_logic_1164.all; use ieee.std_logic_arith.all; use ieee.std_logic_unsigned.all; library work; use work.dtsa_cj_pkg.all; entity E42e is port(por_n:in std_logic; master_clk:in std_logic; itck:in std_logic; ctlr_ntrst_pin:in std_logic; 
+ctlr_tms_pin:in std_logic; ctlr_tdi_pin:in std_logic; loop_around:in std_logic; por_n_sync:out std_logic; reset_n:out std_logic; reset_n_fe:out std_logic; trst_na:out std_logic; trst_sync:out std_logic ); end E42e; architecture RTL of E42e is 
+signal S1:std_logic; signal S2:std_logic; signal S3:std_logic_vector(1 downto 0); signal S4:std_logic; signal S5:std_logic; signal S6:std_logic; signal S7:std_logic; signal S8:std_logic; signal S9:std_logic; signal S10:std_logic; signal S11:std_logic; 
+signal S12:std_logic; signal S13:std_logic; signal S14:std_logic; signal S15:std_logic; signal S16:std_logic; signal S17:std_logic; signal S18:std_logic; begin I47:process(por_n,master_clk) begin if(por_n='0')then 
+por_n_sync<='0'; elsif(master_clk'event and master_clk='1')then por_n_sync<='1'; end if; end process I47; I48:process(por_n,master_clk) begin if(por_n='0')then S14<='0'; S15<='0'; S16<='0'; 
+elsif(master_clk'event and master_clk='1')then S14<=ctlr_ntrst_pin; S15<=S14; S16<=S15; end if; end process I48; S13<=S16 AND not S15; I49:process(por_n,master_clk) begin if(por_n='0')then S10<='0'; 
+S11<='0'; S12<='0'; elsif(master_clk'event and master_clk='1')then S10<=ctlr_tms_pin; S11<=S10; S12<=S11; end if; end process I49; S9<=S12 XOR S11; I50:process(por_n,master_clk) begin 
+if(por_n='0')then S3<=(others=>'0'); elsif(master_clk'event and master_clk='1')then if(S9='1')OR(S6='0')then S3<=(others=>'0'); elsif(S13='1')then S3<=S3+"01"; end if; end if; end process I50; S7<='1'when S3="11"else'0'; 
+S1<=not S15 when loop_around='1'else (S7 AND S6); I51:process(por_n,master_clk) begin if(por_n='0')then S4<='0'; elsif(master_clk'event and master_clk='1')then S4<=S1; end if; end process I51; I52:process(por_n,master_clk) 
+begin if(por_n='0')then S8<='0'; elsif(master_clk'event and master_clk='1')then S8<=ctlr_tdi_pin; end if; end process I52; I53:process(por_n,master_clk) begin if(por_n='0')then S2<='0'; 
+elsif(master_clk'event and master_clk='1')then S2<=not(S14 OR S10 OR S8); end if; end process I53; I54:process(por_n,master_clk) begin if(por_n='0')then S5<='0'; S6<='0'; elsif(master_clk'event and master_clk='1')then S5<=not(S2 OR S4); 
+S6<=S5; end if; end process I54; reset_n<=S6; I55:process(por_n,master_clk) begin if(por_n='0')then reset_n_fe<='0'; elsif(master_clk'event and master_clk='0')then reset_n_fe<=S5; end if; 
+end process I55; trst_na<=ctlr_ntrst_pin AND por_n; I56:process(ctlr_ntrst_pin,por_n,itck) begin if(ctlr_ntrst_pin AND por_n)='0'then S17<='0'; S18<='0'; elsif(itck'event and itck='0')then S17<='1'; S18<=S17; end if; 
+end process I56; trst_sync<=S18; end RTL; 
