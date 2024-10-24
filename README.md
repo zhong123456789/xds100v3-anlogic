@@ -105,7 +105,6 @@ Anlogic EF2M45 使用Anlogic TangDynasty（简称TD）软件开发，因此我�
 ```BASH
 # bank 0 
 set_pin_assignment	{ io_dts_keeper_pin }	{ LOCATION = P3 ; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = SLOW; DRIVESTRENGTH = 4; }
-#set_pin_assignment	{ i_xdsvser_sel }	    { LOCATION = P6 ; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
 set_pin_assignment	{ io_dts_nsrst_pin }	{ LOCATION = P6 ; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; SLEWRATE = SLOW; DRIVESTRENGTH = 4; }
 set_pin_assignment	{ o_dts_ntrst_pin }	    { LOCATION = P7 ; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = SLOW; DRIVESTRENGTH = 4; }
 set_pin_assignment	{ o_dts_emu3_pin }	    { LOCATION = P9 ; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; SLEWRATE = SLOW; DRIVESTRENGTH = 4; }
@@ -116,7 +115,6 @@ set_pin_assignment	{ o_dts_tdi_pin }	    { LOCATION = P13; IOSTANDARD = LVCMOS33
 set_pin_assignment	{ io_dts_tmsc_pin }	    { LOCATION = P14; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = FAST; DRIVESTRENGTH = 4; }
 
 #bank 1
-#set_pin_assignment	{ io_dts_nsrst_pin }	{ LOCATION = P18; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; SLEWRATE = FAST; DRIVESTRENGTH = 20; }
 set_pin_assignment	{ i_dts_tvd_pin }	    { LOCATION = P19; IOSTANDARD = LVCMOS33; PULLTYPE = PULLDOWN; }
 set_pin_assignment	{ i_por_n_pin }	        { LOCATION = P21; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; }
 set_pin_assignment	{ i_clk_50m }	        { LOCATION = P22; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ;  }
@@ -218,7 +216,7 @@ set_max_delay 25.00 -from [get_ports {i_ctlr_ntrst_pin}] -to [get_ports {o_dts_n
 ![alt text](https://github.com/zhong123456789/jp-map/blob/main/xds100v3-anlogic/JTAG-SY.png)
 
 ## 1.3、FT2232 EEPROM设置
-使用FTDI的官方软件[FT_Prog]()编辑配置FT2232，打开软件点击 `DEVICES` -> `Scan and Parse`，软件会自动扫描连接设备，按以下配置各参数：
+使用FTDI的官方软件[FT_Prog](https://ftdichip.com/utilities/)编辑配置FT2232，打开软件点击 `DEVICES` -> `Scan and Parse`，软件会自动扫描连接设备，按以下配置各参数：
 * USB Device Descriptors:  
 ![alt text](https://github.com/zhong123456789/jp-map/blob/main/xds100v3-anlogic/USBDeviceDescriptors.png)
 
