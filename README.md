@@ -1,23 +1,23 @@
-#  **`三、Anlogic EF2M45 XDS100V3国产化方案`**
+#  **`Anlogic EF2M45 XDS100V3国产化方案`**
 
 XDS100V3的FPGA部分仅用作JTAG协议转换功能，因此可选择使用国产FPGA；目前选择Anlogic方案，EF2M45，EF2M45封装为LQFP48，且包含内部Flash，无需外挂外部Flash存储FPGA bit文件，且仅需要单相供电，可降低layout难度；  
 因为封装偏小，需要裁剪原有的部分引脚，屏蔽部分功能，当前已完成测试，实物如下：
 
-![alt text](./jp/XDS100V3-ANLOGIC-bord.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/XDS100V3-ANLOGIC-bord.png)
 
-## 3.1、电路原理图
+## 1.1、电路原理图
 
 #### 电源部分
 FPGA和FT2232仅需要1.8V、3.3V和VTAG
 3.3V电源电路，如下： 
-![alt text](./jp/xds3v3.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/xds3v3.png)
 
 1.8V电源，由FT2232 内部的LDO产生，后级VTAG仅需要1.8V作为参考，功耗不大
-![alt text](./jp/xds1v8.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/xds1v8.png)
 
 VTAG电源，根据JTAG TVD信号的电平，输出同步电压，给FPGA BANK0供电，实现与不同电平电路的互联
 BANK0 手册要求供电电压>1.5V，建议D4使用低电压降的二极管，保证VTAG>1.5V
-![alt text](./jp/xdsVTAG.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/xdsVTAG.png)
 
 FPGA个BANK电压，BANK1-3供电电压为3.3V，BANK0为VTAG
 
@@ -29,9 +29,9 @@ DTS JTAG的所有信号，FPGA的JTAG Pin和XDS100V3的JTAG Pin复用，通过EF
   50M时钟信号（原版位100M，当前修改为50M，通过内部的PL锁定至100M）;
   POR_RST：复位信号；
   PWERGOOD： TVD功能信号，当VTAG > 3V3/2时输出高电平，代表供电正常；
-![alt text](./jp/BANK0__BANK1.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/BANK0__BANK1.png)
 
-![alt text](./jp/xdsTVD.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/xdsTVD.png)
 
 #### FPGA部分 BANK2、BANK3
 * BANK2
@@ -42,64 +42,64 @@ CTL_DIS     : FT2232与FPGA间互联信号；
 * BANK3
 FT2232与FPGA间互联的大部分信号
 
-![alt text](./jp/xdsBANK1_BANK2.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/xdsBANK1_BANK2.png)
 
 #### FT2232电路
 FT2232电路电路如下：
-![alt text](./jp/xdsFT2232.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/xdsFT2232.png)
 
 
 #### 注意
 EF_JTAGEN建议使用<= 1K电阻下拉，否则会导致FPGA工作异常；
-![alt text](./jp/xdsJTE.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/xdsJTE.png)
 
 
-## 3.2、FPGA VHDL文件综合
+## 1.2、FPGA VHDL文件综合
 Anlogic EF2M45 使用Anlogic TangDynasty（简称TD）软件开发，因此我们需要使用TD软件重新综合VHDL文件；
 
-### 3.2.1、TD软件安装
+### 1.2.1、TD软件安装
 [Anlogic官方TD下载链接](https://www.anlogic.com/support/tools-downloads)，官网下载需要升级到对应的权限，需要发邮件给Anlogic说明需求等待回复；建议下载仅包含Release的包，其他描述的可能不支持EF2M45器件
 
-![alt text](./jp/AnlogicTangDynasty.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/AnlogicTangDynasty.png)
 
 安装完成后复制license到安装目录即可使用；
 
-### 3.2.2、创建工程、添加VHDL文件
+### 1.2.2、创建工程、添加VHDL文件
 * 创建工程
 选择EF2M45LG48B器件
-![alt text](./jp/project-new-dev.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/project-new-dev.png)
 
 * FPGA的JTAG作为普通IO
-![alt text](./jp/project-jtag.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/project-jtag.png)
 
 * 选择添加HDL文件
-![alt text](./jp/project-hdl.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/project-hdl.png)
 
 * 移除dtsa_a3p060.vhd文件
 不需要dtsa_a3p060.vhd文件，移除即可
-![alt text](./jp/dtsa_a3p060.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/dtsa_a3p060.png)
 
 * 设置xds-anlogic.vhdl为顶层文件
 该文件调用了dtsa_a3p125，配置dtsa_a3p125某些未使用的port为默认值
-![alt text](./jp/prj-xds-anlogic.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/prj-xds-anlogic.png)
 
-### 3.2.3、添加PLL IP核
+### 1.2.3、添加PLL IP核
 
 因为工程需要PLL将50M时钟信号锁频到100M，所以需要添加PLL IP核  
 * 按照下图配置IP对应参数
-![alt text](./jp/PLLIP.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/PLLIP.png)
 
 * 确认参数后点击生成VHDL文件
-![alt text](./jp/pll_ip_2.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/pll_ip_2.png)
 
-![alt text](./jp/pll_ip_3.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/pll_ip_3.png)
 
 * 刷新检查VHDL文件语法，确认语法正常
-![alt text](./jp/VHDL_Check.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/VHDL_Check.png)
 
-### 3.2.4、添加引脚约束ADC文件
+### 1.2.4、添加引脚约束ADC文件
 添加ADC引脚约束文件，分配配置FPGA引脚
-![alt text](./jp/ADCcon.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/ADCcon.png)
 
 文件内容如下：
 ```BASH
@@ -148,7 +148,7 @@ set_pin_assignment	{ o_tdo_to_ctlr }	    { LOCATION = P45; IOSTANDARD = LVCMOS33
 set_pin_assignment	{ i_ctlr_tdi_pin }	    { LOCATION = P46; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
 set_pin_assignment	{ i_ctlr_tck_pin }	    { LOCATION = P47; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
 ```
-### 3.2.5、添加时序约束SDC文件
+### 1.2.5、添加时序约束SDC文件
 参考3.2.4、添加引脚约束ADC文件，SDC文件内容如下
 ```BASH
 # create_clock -add -name <string> -period <double> -waveform <string> target
@@ -196,52 +196,54 @@ set_false_path -to [get_ports {o_dts_emu3_pin}]
 set_max_delay 25.00 -from [get_ports {i_ctlr_ntrst_pin}] -to [get_ports {o_dts_ntrst_pin}]
 ```
 
-### 3.2.6、综合VHDL文件
+### 1.2.6、综合VHDL文件
 点击RUN按钮一键综合 HDL文件，可下方查看生产结构及资源消耗情况
-![alt text](./jp/TDrun.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/TDrun.png)
 
-### 3.2.7、烧录到FPGA FLASH
+### 1.2.7、烧录到FPGA FLASH
 * 点击Download按钮,如果显示No hardware，可能是Anlogic USA JTAG下载器的驱动未安装需要手动安装，驱动目录位于 `软件安装目录/driver` 目录下
-![alt text](./jp/TDDownLoad.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/TDDownLoad.png)
 * 安装完成驱动后，设备管理器，应该有`AL-Link` 设备
-![alt text](./jp/AL-Link.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/AL-Link.png)
 
 * 将EF_JTAGEN信号拉高即可刷新出EF2M45B设备
-![alt text](./jp/EF2M45B-dev.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/EF2M45B-dev.png)
 
 * 烧录到FPGA FLASH
-![alt text](./jp/bitfile.png)
-![alt text](./jp/download_run.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/bitfile.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/download_run.png)
 
 ### 注意： ###   
 因为FPGA的JTAG复用作为IO，但是与PCB上的丝印的映射不同，烧录下载时需要按下图连接下载器：
-![alt text](./jp/JTAG-SY.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/JTAG-SY.png)
 
-## 3.3、FT2232 EEPROM设置
+## 1.3、FT2232 EEPROM设置
 使用FTDI的官方软件[FT_Prog]()编辑配置FT2232，打开软件点击 `DEVICES` -> `Scan and Parse`，软件会自动扫描连接设备，按以下配置各参数：
 * USB Device Descriptors:
-![alt text](./jp/USBDeviceDescriptors.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/USBDeviceDescriptors.png)
 
 * USB Config Descriptors:
-![alt text](./jp/USBConfigDescriptors.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/USBConfigDescriptors.png)
 
 * USB String Descriptors:
-![alt text](./jp/USBStringDescriptors.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/USBStringDescriptors.png)
 
 * PortA Hardware Specific
-![alt text](./jp/PortAHardwareSpecific.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/PortAHardwareSpecific.png)
 
 * PortA Driver
-![alt text](./jp/PortADriver.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/PortADriver.png)
 
 * PortB Hardware Specific
-![alt text](./jp/PortBHardwareSpecific.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/PortBHardwareSpecific.png)
 
 * PortB  Driver
-![alt text](./jp/PortBDriver.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/PortBDriver.png)
 
 修改完成后点击 `DEVICES` -> `Program`烧录配置到FT2232外挂的EEPROM中，然后再点击软件`DEVICES` -> `Scan and Parse`刷新读取FT2232外挂的EEPROM信息：
 * EEPROM信息如下
-![alt text](./jp/ft2232_eeprom.png)
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/ft2232_eeprom.png)
 
-## 3.4、功能测试
+## 1.4、功能测试
+使用TI 的CCS IDE测试XDS100V3，结果如下：
+![alt text](https://github.com/zhong123456789/jp-map/tree/main/xds100v3-anlogic/ccs_ide_xds100v3.png)
