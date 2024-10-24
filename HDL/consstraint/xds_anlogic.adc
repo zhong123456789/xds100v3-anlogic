@@ -1,0 +1,44 @@
+# bank 0 
+set_pin_assignment	{ io_dts_keeper_pin }	{ LOCATION = P3 ; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = SLOW; DRIVESTRENGTH = 4; }
+#set_pin_assignment	{ i_xdsvser_sel }	    { LOCATION = P6 ; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+set_pin_assignment	{ io_dts_nsrst_pin }	{ LOCATION = P6 ; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; SLEWRATE = SLOW; DRIVESTRENGTH = 4; }
+set_pin_assignment	{ o_dts_ntrst_pin }	    { LOCATION = P7 ; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = SLOW; DRIVESTRENGTH = 4; }
+set_pin_assignment	{ o_dts_emu3_pin }	    { LOCATION = P9 ; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; SLEWRATE = SLOW; DRIVESTRENGTH = 4; }
+set_pin_assignment	{ i_dts_emu2_pin }	    { LOCATION = P10; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+set_pin_assignment	{ o_dts_tck_pin }	    { LOCATION = P11; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = FAST; DRIVESTRENGTH = 4; }
+set_pin_assignment	{ i_dts_tdo_pin }	    { LOCATION = P12; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ;}
+set_pin_assignment	{ o_dts_tdi_pin }	    { LOCATION = P13; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = FAST; DRIVESTRENGTH = 4; }
+set_pin_assignment	{ io_dts_tmsc_pin }	    { LOCATION = P14; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = FAST; DRIVESTRENGTH = 4; }
+
+#bank 1
+#set_pin_assignment	{ io_dts_nsrst_pin }	{ LOCATION = P18; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; SLEWRATE = FAST; DRIVESTRENGTH = 20; }
+set_pin_assignment	{ i_dts_tvd_pin }	    { LOCATION = P19; IOSTANDARD = LVCMOS33; PULLTYPE = PULLDOWN; }
+set_pin_assignment	{ i_por_n_pin }	        { LOCATION = P21; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; }
+set_pin_assignment	{ i_clk_50m }	        { LOCATION = P22; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ;  }
+set_pin_assignment	{ o_rxd_out }	        { LOCATION = P24; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = FAST; DRIVESTRENGTH = 20; }
+set_pin_assignment	{ i_txd_in }	        { LOCATION = P25; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+set_pin_assignment	{ o_pll_clk_out }	    { LOCATION = P16; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = FAST; DRIVESTRENGTH = 20; }
+
+#bank 2
+set_pin_assignment	{ o_adv_mode_led }	    { LOCATION = P26; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = SLOW; DRIVESTRENGTH = 4; }
+set_pin_assignment	{ i_alt_function_n }	{ LOCATION = P27; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+set_pin_assignment	{ i_dtsa_byp_n }	    { LOCATION = P28; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+set_pin_assignment	{ o_ctlr_tdis_pin }	    { LOCATION = P30; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = SLOW; DRIVESTRENGTH = 2; }
+
+#bank 3
+set_pin_assignment	{ i_ctlr_pod_rls_pin }	{ LOCATION = P34; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+set_pin_assignment	{ i_ctlr_emu1_pin }	    { LOCATION = P36; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+set_pin_assignment	{ o_ctlr_tvd_pin }	    { LOCATION = P37; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = FAST; DRIVESTRENGTH = 20; }
+set_pin_assignment	{ o_clk_fail_pin }	    { LOCATION = P38; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = FAST; DRIVESTRENGTH = 20; }
+
+set_pin_assignment	{ i_ctlr_nsrst_pin }	{ LOCATION = P39; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+set_pin_assignment	{ o_ctlr_rtck_pin }	    { LOCATION = P40; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = FAST; DRIVESTRENGTH = 20; }
+set_pin_assignment	{ i_ctlr_emu0_pin }	    { LOCATION = P41; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+set_pin_assignment	{ i_ctlr_emu_en_pin }	{ LOCATION = P42; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+
+set_pin_assignment	{ i_ctlr_ntrst_pin }	{ LOCATION = P43; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+
+set_pin_assignment	{ i_ctlr_tms_pin }	    { LOCATION = P44; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+set_pin_assignment	{ o_tdo_to_ctlr }	    { LOCATION = P45; IOSTANDARD = LVCMOS33; PULLTYPE = NONE    ; SLEWRATE = FAST; DRIVESTRENGTH = 20; }
+set_pin_assignment	{ i_ctlr_tdi_pin }	    { LOCATION = P46; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
+set_pin_assignment	{ i_ctlr_tck_pin }	    { LOCATION = P47; IOSTANDARD = LVCMOS33; PULLTYPE = PULLUP  ; }
