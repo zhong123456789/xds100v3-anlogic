@@ -22,24 +22,24 @@ BANK0 手册要求供电电压>1.5V，建议D4使用低电压降的二极管，�
 FPGA个BANK电压，BANK1-3供电电压为3.3V，BANK0为VTAG 
 
 #### FPGA部分 BANK0、BANK1
-* BANK0:  
+* BANK0:   
 DTS JTAG的所有信号，FPGA的JTAG Pin和XDS100V3的JTAG Pin复用，通过EF_PROG_EN_n和EF_JTAGEN信号切换功能；
-* BANK1：
-  串口信号;
-  50M时钟信号（原版位100M，当前修改为50M，通过内部的PL锁定至100M）;
-  POR_RST：复位信号； 
-  PWERGOOD： TVD功能信号，当VTAG > 3V3/2时输出高电平，代表供电正常；  
+* BANK1：   
+  串口信号;  
+  50M时钟信号（原版位100M，当前修改为50M，通过内部的PL锁定至100M）;  
+  POR_RST：复位信号；   
+  PWERGOOD： TVD功能信号，当VTAG > 3V3/2时输出高电平，代表供电正常；    
 ![alt text](https://github.com/zhong123456789/jp-map/blob/main/xds100v3-anlogic/BANK0__BANK1.png)  
 
 ![alt text](https://github.com/zhong123456789/jp-map/blob/main/xds100v3-anlogic/xdsTVD.png)  
 
 #### FPGA部分 BANK2、BANK3
-* BANK2
-ADV_MODE_LED：LED状态信号；
-Alt_Func_n  : FT2232输出的Alt功能控制信号；
-Dtsa_byp_n  : FT2232与FPGA间互联信号；
-CTL_DIS     : FT2232与FPGA间互联信号；
-* BANK3
+* BANK2  
+ADV_MODE_LED：LED状态信号；  
+Alt_Func_n  : FT2232输出的Alt功能控制信号；  
+Dtsa_byp_n  : FT2232与FPGA间互联信号；  
+CTL_DIS     : FT2232与FPGA间互联信号；  
+* BANK3  
 FT2232与FPGA间互联的大部分信号  
 
 ![alt text](https://github.com/zhong123456789/jp-map/blob/main/xds100v3-anlogic/xdsBANK1_BANK2.png)  
